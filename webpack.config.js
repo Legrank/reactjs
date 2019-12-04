@@ -10,6 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, 'static', 'build'),
         filename: 'app.js',
     },
+    watch: true,
     module: {
         rules: [
             {
@@ -18,10 +19,21 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 options: {
-                  presets: ['@babel/env', '@babel/react'],
-
+                  presets: ['@babel/env', '@babel/react'],//пресеты бабеля
+                  plugins: [
+                    [
+                        "@babel/plugin-proposal-class-properties", //npm install @babel/plugin-proposal-class-properties
+                        {                                          //возможность обьявлять стейт вне конструктора
+                            "loose": true
+                        }
+                    ]
+                ]
                 }
             },
         ],
     },
+    resolve: {//Авто импорт файлов с расширение jsx
+        modules: [`${__dirname}/static_src`, 'node_modules'],
+        extensions: ['.js', '.jsx'],
+     },
 }
