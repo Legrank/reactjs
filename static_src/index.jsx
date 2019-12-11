@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/MessageField';
+import App from './components/Layout';
 
 ReactDOM.render(
    <App />,
