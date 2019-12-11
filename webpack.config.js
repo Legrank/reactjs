@@ -28,7 +28,11 @@ module.exports = {
                         }
                     ]
                 ]
-                }
+                },
+            },
+            {
+                test: /\.css$/,//npm install css-loader style-loader
+                loader: 'style-loader!css-loader',//подключаем стили
             },
         ],
     },
