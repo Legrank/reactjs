@@ -30,8 +30,8 @@ export default class Layout extends Component {
             messages: {...messages,
                 [messageId]: {text: message, autor: autor}},
             chats: {...chats,
-                [chatId]: { ...chats[chatId],
-                    messageList: [...chats[chatId]['messageList'], messageId]
+                [chat]: { ...chats[chat],
+                    messageList: [...chats[chat]['messageList'], messageId]
                 }
             },
         })

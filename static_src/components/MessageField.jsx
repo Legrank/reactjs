@@ -23,8 +23,8 @@ export default class MessageField extends Component {
                 input: '',
                 udate: true,
             })
+            this.props.sendMessage(message, 'Me', this.props.chatId)
         }
-        this.props.sendMessage(message, 'Me', this.props.chatId)
     }
 
     handleClick = (message) => {
@@ -39,15 +39,16 @@ export default class MessageField extends Component {
 
     componentDidUpdate() {
         if (this.state.udate) {
+            const chatId = this.props.chatId
+            this.setState({
+                udate: false,
+            })
             setTimeout(() => {
-                this.setState({
-                    udate: false,
-                })
-                this.props.sendMessage("Я бот ", 'Бот', this.props.chatId)
+                this.props.sendMessage("Я бот ", 'Бот', chatId)
             }, 3000)
         }
     }
-
+ 
     render() {
         const chatId = this.props.chatId
         const chats = this.props.chats
