@@ -10,8 +10,11 @@ export default class Profile extends Component {
             <div>
                 <Heder chatId= 'Профиль' ></Heder>
                 <div className='chat'>
-                    <p>Имя: Вася</p>
-                    <p>Возраст: 27</p>
+                    <ul>
+                        <li>Имя: Вася</li>
+                        <li>Возраст: 27</li>
+                        <li>Пол: М</li>
+                    </ul>
                 </div>
                 <Link to={`/`}>
                     <ListItem button>
