@@ -39,5 +39,13 @@ module.exports = {
     resolve: {//Авто импорт файлов с расширение jsx
         modules: [`${__dirname}/static_src`, 'node_modules'],
         extensions: ['.js', '.jsx'],
+    },
+    devtool: 'cheap-inline-module-source-map', //показывает исходники
+    devServer: {        //Отдавать индекс на все запросы к несуществующим файлам
+        port: 8080,
+        historyApiFallback: {
+            index: 'index.html'
+        }
      },
+
 }

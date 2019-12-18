@@ -6,9 +6,8 @@ import Message from './Message'
 
 export default class MessageField extends Component {
     state = {
-        messages: [{ autor: "Вася", text: "Привет!" }, { autor: "Вика", text: "Как дела?" }],
-        udate: false,
         input: '',
+        udate: false,
     }
 
     handleChange = (event) => {
@@ -21,10 +20,10 @@ export default class MessageField extends Component {
     sendMessage = (message) => {
         if (this.state.input) {
             this.setState({
-                messages: [...this.state.messages, { autor: "Я", text: message }],
-                udate: true,
                 input: '',
+                udate: true,
             })
+            this.props.sendMessage(message, 'Me', this.props.chatId)
         }
     }
 
@@ -40,18 +39,23 @@ export default class MessageField extends Component {
 
     componentDidUpdate() {
         if (this.state.udate) {
+            const chatId = this.props.chatId
+            this.setState({
+                udate: false,
+            })
             setTimeout(() => {
-                this.setState({
-                    messages: [...this.state.messages, { autor: "Бот", text: "Я бот "}],
-                    udate: false
-                })
+                this.props.sendMessage("Я бот ", 'Бот', chatId)
             }, 3000)
         }
     }
-
+ 
     render() {
-        const messageElements = this.state.messages.map((message, index) => (
-            <Message key={index} text={message.text} autor={message.autor} />));
+        const chatId = this.props.chatId
+        const chats = this.props.chats
+        const messages = this.props.messages
+        const messageElements = chats[chatId].messageList.map((messageId) => {
+            return <Message key={ messageId } text={ messages[messageId].text } autor={ messages[messageId].autor } />
+        })
 
         return <div className="layout">
             <div className="message-field">

@@ -8,7 +8,7 @@ export default class ChatList extends Component {
     }
     render() {
         const chatElements = this.state.chats.map((chat, index) => (
-            <ChatItem key={index} text={chat.text} />));
+            <ChatItem key={index} text={chat.text} chatId={index}/>));
         return (
             <div className='chat-list'>
                 <List component="nav" aria-label="main mailbox folders" classes={{ root: 'allwidth' }}>
