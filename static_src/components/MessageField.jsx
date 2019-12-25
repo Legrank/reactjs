@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
+import {bindActionCreators} from "redux"
+import connect from "react-redux/es/connect/connect"
 import {InputBase, Button, Paper} from '@material-ui/core'
 import SendIcon from '@material-ui/icons/SendOutlined'
+import { sendMessage } from "../actions/messageActions"
 import Message from './Message'
 
-export default class MessageField extends Component {
+export class MessageField extends Component {
     state = {
         input: '',
         udate: false,
@@ -23,7 +26,10 @@ export default class MessageField extends Component {
                 input: '',
                 udate: true,
             })
-            this.props.sendMessage(message, 'Me', this.props.chatId)
+        const { chatId, messages } = this.props
+
+        const messageId = Object.keys(messages).length + 1
+        this.props.sendMessage(messageId, message, 'Я', chatId)
         }
     }
 
@@ -39,12 +45,13 @@ export default class MessageField extends Component {
 
     componentDidUpdate() {
         if (this.state.udate) {
-            const chatId = this.props.chatId
+            const { chatId, messages } = this.props
             this.setState({
                 udate: false,
             })
             setTimeout(() => {
-                this.props.sendMessage("Я бот ", 'Бот', chatId)
+                const messageId = Object.keys(messages).length + 1
+                this.props.sendMessage(messageId, "Я бот ", 'Бот', chatId)
             }, 3000)
         }
     }
@@ -74,4 +81,11 @@ export default class MessageField extends Component {
         </div>
     }
 }
-//<button onClick={this.handleClick}></button>
+
+const mapStateToProps = ({ chatReducer, messageReduser }) => ({
+    chats: chatReducer.chats,
+    messages: messageReduser.messages
+ })
+ const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch)
+ export default connect(mapStateToProps, mapDispatchToProps)(MessageField)
+ 
