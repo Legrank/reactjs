@@ -1,52 +1,40 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from "redux"
+import connect from "react-redux/es/connect/connect"
 import ChatList from './ChatList'
 import Heder from './Header'
 import MessageField from './MessageField'
 
-export default class Layout extends Component {
-    state = {
-        chats: {
-                0:{ text: "Первый чат", messageList: [1,3] },
-                1:{text: "React", messageList: [2] },
-                2:{ text: "JS", messageList: [] },
-                3:{ text: "Супер чат!!!", messageList: [] },
-                4:{ text: "Все СЮДА!!!!!!!!!!!!!!!!!", messageList: [] },
-            },
-        messages: {
-                1:{ autor: "Бот", text: "Привет!" },
-                2:{ autor: "Бот", text: "Как дела?" },
-                3:{ autor: "Бот", text: "Как дела?" },
-            },
-    }
+export class Layout extends Component {
     static defaultProps = {
         chatId: 4,
     }
 
-    sendMessage = (message, autor, chat) => {
-        const { messages, chats } = this.state;
+    sendMessage = (message, sender) => {
+        const { messages } = this.state;
         const { chatId } = this.props;
+ 
         const messageId = Object.keys(messages).length + 1;
-        this.setState({
-            messages: {...messages,
-                [messageId]: {text: message, autor: autor}},
-            chats: {...chats,
-                [chat]: { ...chats[chat],
-                    messageList: [...chats[chat]['messageList'], messageId]
-                }
-            },
-        })
+        this.props.sendMessage(messageId, message, sender, chatId);
     }
 
     render() {
         const chatId = this.props.chatId
         return (
             <div>
-                <Heder chatId={ this.state.chats[chatId].text } ></Heder>
+                <Heder chatId={ chatId }></Heder>
                 <div className='chat'>
-                    <MessageField sendMessage = { this.sendMessage } messages ={ this.state.messages } chats = { this.state.chats } chatId={ chatId }></MessageField>
+                    <MessageField
+                        chatId={ chatId }
+                    />
                     <ChatList></ChatList>
                 </div>
             </div>
         )
     }
 }
+
+const mapStateToProps = ({}) => ({})
+const mapDispatchToProps = dispatch => bindActionCreators({ }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)
+

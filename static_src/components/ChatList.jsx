@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import {bindActionCreators} from "redux";
+import connect from "react-redux/es/connect/connect"
 import List from '@material-ui/core/List';
 import ChatItem from './ChatItem'
+import { addChat } from '../actions/chatActions'
 
-export default class ChatList extends Component {
+export class ChatList extends Component {
     state = {
         chats: [{ text: "Первый чат" }, {text: "React" }, { text: "JS" }, { text: "Супер чат!!!" }, { text: "Все СЮДА!!!!!!!!!!!!!!!!!" },],
     }
@@ -18,3 +21,9 @@ export default class ChatList extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ chatReducer }) => ({
+    chats: chatReducer.chats,
+ })
+ const mapDispatchToProps = dispatch => bindActionCreators({ addChat }, dispatch)
+ export default connect(mapStateToProps, mapDispatchToProps)(ChatList)
