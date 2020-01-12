@@ -42,19 +42,6 @@ export class MessageField extends Component {
             this.sendMessage(message)
         }
     }
-
-    componentDidUpdate() {
-        if (this.state.udate) {
-            const { chatId, messages } = this.props
-            this.setState({
-                udate: false,
-            })
-            setTimeout(() => {
-                const messageId = Object.keys(messages).length + 1
-                this.props.sendMessage(messageId, "Я бот ", 'Бот', chatId)
-            }, 3000)
-        }
-    }
  
     render() {
         const chatId = this.props.chatId

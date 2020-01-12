@@ -6,12 +6,9 @@ import ChatItem from './ChatItem'
 import { addChat } from '../actions/chatActions'
 
 export class ChatList extends Component {
-    state = {
-        chats: [{ text: "Первый чат" }, {text: "React" }, { text: "JS" }, { text: "Супер чат!!!" }, { text: "Все СЮДА!!!!!!!!!!!!!!!!!" },],
-    }
     render() {
-        const chatElements = this.state.chats.map((chat, index) => (
-            <ChatItem key={index} text={chat.text} chatId={index}/>));
+        const chatElements = Object.keys(this.props.chats).map((chatId, index) => (
+            <ChatItem key={chatId} text={this.props.chats[chatId].text} chatId={chatId}/>));
         return (
             <div className='chat-list'>
                 <List component="nav" aria-label="main mailbox folders" classes={{ root: 'allwidth' }}>
