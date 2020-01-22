@@ -1,12 +1,14 @@
 import update from 'react-addons-update';
-import { SEND_MESSAGE } from '../actions/messageActions';
+import { SEND_MESSAGE, } from '../actions/messageActions';
+import {
+    START_CHATS_LOADING,
+    SUCCESS_CHATS_LOADING,
+    ERROR_CHATS_LOADING,
+ } from '../actions/chatActions';
 
 const initialStore = {
-    messages: {
-        1:{ autor: "Бот", text: "Привет!" },
-        2:{ autor: "Бот", text: "Как дела?" },
-        3:{ autor: "Бот", text: "Как дела?" },
-    },
+    messages: {},
+    isLoading: true,
 };
 
 
@@ -21,6 +23,21 @@ export default function messageReduser(store = initialStore, action) {
             }
         });
        }
+       case START_CHATS_LOADING: {
+            return update(store, {
+            isLoading: { $set: true },
+            });
+        }
+        case SUCCESS_CHATS_LOADING: {
+            return update(store, {
+                messages: { $set: action.payload.entities.messages },
+            });
+        }
+        case ERROR_CHATS_LOADING: {
+            return update(store, {
+                isLoading: { $set: false },
+            });
+        }
        default:
            return store;
    }
