@@ -1,0 +1,44 @@
+{
+  "name": "myreact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --mode development",
+    "server": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Legrank/reactjs.git"
+  },
+  "author": "Dmitriy Brizhak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Legrank/reactjs/issues"
+  },
+  "homepage": "https://github.com/Legrank/reactjs#readme",
+  "dependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@material-ui/core": "^4.7.2",
+    "@material-ui/icons": "^4.5.1",
+    "babel-loader": "^8.0.6",
+    "connected-react-router": "^6.6.1",
+    "css-loader": "^3.3.0",
+    "history": "^4.10.1",
+    "react": "^16.12.0",
+    "react-addons-update": "^15.6.2",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.1.3",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "style-loader": "^1.0.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
