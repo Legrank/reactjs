@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import {CircularProgress} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import {bindActionCreators} from "redux"
 import connect from "react-redux/es/connect/connect"
 import {InputBase, Button, Paper} from '@material-ui/core'
 import SendIcon from '@material-ui/icons/SendOutlined'
 import { sendMessage } from "../actions/messageActions"
+import { loadChats } from '../actions/chatActions';
 import Message from './Message'
 
 export class MessageField extends Component {
@@ -42,8 +44,15 @@ export class MessageField extends Component {
             this.sendMessage(message)
         }
     }
+
+    componentDidMount() {
+        this.props.loadChats();
+    }
  
     render() {
+        if (this.props.isLoading) {
+            return <CircularProgress />
+        }
         const chatId = this.props.chatId
         const chats = this.props.chats
         const messages = this.props.messages
@@ -71,8 +80,9 @@ export class MessageField extends Component {
 
 const mapStateToProps = ({ chatReducer, messageReduser }) => ({
     chats: chatReducer.chats,
-    messages: messageReduser.messages
+    messages: messageReduser.messages,
+    isLoading: chatReducer.isLoading,
  })
- const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage }, dispatch)
+ const mapDispatchToProps = dispatch => bindActionCreators({ sendMessage, loadChats }, dispatch)
  export default connect(mapStateToProps, mapDispatchToProps)(MessageField)
  

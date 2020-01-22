@@ -7,7 +7,7 @@ import MessageField from './MessageField'
 
 export class Layout extends Component {
     static defaultProps = {
-        chatId: 4,
+        chatId: 1,
     }
 
     sendMessage = (message, sender) => {
