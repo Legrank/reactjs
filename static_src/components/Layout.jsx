@@ -4,6 +4,7 @@ import connect from "react-redux/es/connect/connect"
 import ChatList from './ChatList'
 import Heder from './Header'
 import MessageField from './MessageField'
+import InstallPopup from './InstallPopup'
 
 export class Layout extends Component {
     static defaultProps = {
@@ -22,6 +23,7 @@ export class Layout extends Component {
         const chatId = this.props.chatId
         return (
             <div>
+                <InstallPopup />
                 <Heder chatId={ chatId }></Heder>
                 <div className='chat'>
                     <MessageField

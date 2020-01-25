@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack --mode development",
-    "server": "webpack-dev-server"
+    "server": "webpack-dev-server",
+    "bild": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "connected-react-router": "^6.6.1",
     "css-loader": "^3.3.0",
     "history": "^4.10.1",
+    "material-design-icons": "^3.0.1",
     "normalizr": "^3.4.1",
     "react": "^16.12.0",
     "react-addons-update": "^15.6.2",
